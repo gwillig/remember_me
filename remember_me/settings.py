@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import os
 import json
+import django_heroku
 '#1.Step: Load env variables'
 env_dict = {}
 for el in ["USER_NAME_DB", "PASSWORD_DB", "SECRET_KEY"]:
@@ -132,3 +133,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+# Configure Django App for Heroku.
+
+django_heroku.settings(locals())

@@ -14,7 +14,7 @@ import json
 '#1.Step: Load env variables'
 env_dict = {}
 for el in ["USER_NAME_DB", "PASSWORD_DB", "SECRET_KEY"]:
-    if el[0] in os.environ.keys():
+    if el in os.environ.keys():
         env_dict[el] = os.environ[el]
     else:
         with open('env.json', 'r') as env_file:

@@ -9,8 +9,16 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
 import os
+import json
+'#1.Step: Load env variables'
+env_dict = {}
+for el in ["USER_NAME_DB", "PASSWORD_DB", "SECRET_KEY"]:
+    if el[0] in os.environ.keys():
+        env_dict[el] = os.environ[el]
+    else:
+        with open('env.json', 'r') as env_file:
+            env_dict = json.load(env_file)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +28,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'lbo0pvs+7ze-!w9g+e3*cd+h5k9dp+n&*)=+&3*6epbmo%=^no'
+SECRET_KEY = env_dict["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['remembermegw.herokuapp.com']
+ALLOWED_HOSTS = ['remembermegw.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -75,12 +83,15 @@ WSGI_APPLICATION = 'remember_me.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
+            "default": {
+                "ENGINE": "django.db.backends.postgresql_psycopg2",
+                "NAME": "dem6n49k540u1s",
+                "USER": env_dict["USER_NAME_DB"],
+                "PASSWORD": env_dict["PASSWORD_DB"],
+                "HOST": "ec2-50-16-198-4.compute-1.amazonaws.com",
+                "PORT": "5432",
+            }
+        }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators

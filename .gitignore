@@ -38,6 +38,8 @@ pip-log.txt
 pip-delete-this-directory.txt
 
 # Unit test / coverage reports
+env.json
+remember_me/env.json
 htmlcov/
 .tox/
 .nox/
@@ -102,6 +104,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
+.idea
 .env
 .venv
 env/
